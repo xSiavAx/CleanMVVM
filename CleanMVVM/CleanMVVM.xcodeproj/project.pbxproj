@@ -13,6 +13,7 @@
 		A76DC17E29C2577100F76747 /* DataAcess in Frameworks */ = {isa = PBXBuildFile; productRef = A76DC17D29C2577100F76747 /* DataAcess */; };
 		A76DC18029C2577100F76747 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = A76DC17F29C2577100F76747 /* Domain */; };
 		A76DC18229C2577100F76747 /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = A76DC18129C2577100F76747 /* Presentation */; };
+		A796149029C26E3700145BFE /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = A796148F29C26E3700145BFE /* Common */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		A76DC17929C2572E00F76747 /* DataAcess */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DataAcess; path = ../DataAcess; sourceTree = "<group>"; };
 		A76DC17A29C2572E00F76747 /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Presentation; path = ../Presentation; sourceTree = "<group>"; };
 		A76DC17B29C2572E00F76747 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Domain; path = ../Domain; sourceTree = "<group>"; };
+		A796148D29C26E2E00145BFE /* Common */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Common; path = ../Common; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +35,7 @@
 				A76DC18029C2577100F76747 /* Domain in Frameworks */,
 				A76DC18229C2577100F76747 /* Presentation in Frameworks */,
 				A76DC17E29C2577100F76747 /* DataAcess in Frameworks */,
+				A796149029C26E3700145BFE /* Common in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,12 +45,13 @@
 		A76DC15F29C2564B00F76747 = {
 			isa = PBXGroup;
 			children = (
+				A796148D29C26E2E00145BFE /* Common */,
 				A76DC17929C2572E00F76747 /* DataAcess */,
 				A76DC17B29C2572E00F76747 /* Domain */,
 				A76DC17A29C2572E00F76747 /* Presentation */,
 				A76DC16A29C2564B00F76747 /* CleanMVVM */,
 				A76DC16929C2564B00F76747 /* Products */,
-				A76DC17C29C2577100F76747 /* Frameworks */,
+				A796148E29C26E3700145BFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,7 +81,7 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		A76DC17C29C2577100F76747 /* Frameworks */ = {
+		A796148E29C26E3700145BFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -104,6 +108,7 @@
 				A76DC17D29C2577100F76747 /* DataAcess */,
 				A76DC17F29C2577100F76747 /* Domain */,
 				A76DC18129C2577100F76747 /* Presentation */,
+				A796148F29C26E3700145BFE /* Common */,
 			);
 			productName = CleanMVVM;
 			productReference = A76DC16829C2564B00F76747 /* CleanMVVM.app */;
@@ -373,6 +378,10 @@
 		A76DC18129C2577100F76747 /* Presentation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Presentation;
+		};
+		A796148F29C26E3700145BFE /* Common */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Common;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
