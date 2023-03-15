@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject
-    var viewModel = LoginViewModel()
+    var viewModel = LoginViewModel(loginUseCase: DummyLoginUseCase())
     
     var body: some View {
         Form {
@@ -34,6 +34,7 @@ struct LoginView: View {
         }
         .navigationTitle("Welcome")
         .activityDimming($viewModel.isDimmed)
+        .errorHandling($viewModel.errorAlert)
     }
 }
 
