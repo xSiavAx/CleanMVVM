@@ -1,11 +1,11 @@
 import XCTest
-@testable import DataAcess
+@testable import DataAccess
 
-final class DataAcessTests: XCTestCase {
+final class DataAccessTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(DataAcess().text, "Hello, World!")
+        XCTAssertEqual(DataAccess().text, "Hello, World!")
     }
 }

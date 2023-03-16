@@ -1,5 +1,5 @@
 import Foundation
 
-public protocol LoginApi {
+public protocol AuthRepository {
     func login(_ credentials: Credentials) async throws
 }

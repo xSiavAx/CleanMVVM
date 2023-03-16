@@ -10,10 +10,10 @@
 		A76DC16C29C2564B00F76747 /* CleanMVVMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76DC16B29C2564B00F76747 /* CleanMVVMApp.swift */; };
 		A76DC17029C2564C00F76747 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A76DC16F29C2564C00F76747 /* Assets.xcassets */; };
 		A76DC17329C2564C00F76747 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A76DC17229C2564C00F76747 /* Preview Assets.xcassets */; };
-		A76DC17E29C2577100F76747 /* DataAcess in Frameworks */ = {isa = PBXBuildFile; productRef = A76DC17D29C2577100F76747 /* DataAcess */; };
 		A76DC18029C2577100F76747 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = A76DC17F29C2577100F76747 /* Domain */; };
 		A76DC18229C2577100F76747 /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = A76DC18129C2577100F76747 /* Presentation */; };
 		A796149029C26E3700145BFE /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = A796148F29C26E3700145BFE /* Common */; };
+		A7E99F9329C3BABA00D9E0C0 /* DataAccess in Frameworks */ = {isa = PBXBuildFile; productRef = A7E99F9229C3BABA00D9E0C0 /* DataAccess */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,10 +21,11 @@
 		A76DC16B29C2564B00F76747 /* CleanMVVMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanMVVMApp.swift; sourceTree = "<group>"; };
 		A76DC16F29C2564C00F76747 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A76DC17229C2564C00F76747 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		A76DC17929C2572E00F76747 /* DataAcess */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DataAcess; path = ../DataAcess; sourceTree = "<group>"; };
 		A76DC17A29C2572E00F76747 /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Presentation; path = ../Presentation; sourceTree = "<group>"; };
 		A76DC17B29C2572E00F76747 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Domain; path = ../Domain; sourceTree = "<group>"; };
 		A796148D29C26E2E00145BFE /* Common */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Common; path = ../Common; sourceTree = "<group>"; };
+		A7CB89A029C2994800D2EC35 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Networking; path = ../Networking; sourceTree = "<group>"; };
+		A7E99F9129C3B0D000D9E0C0 /* DataAccess */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DataAccess; path = ../DataAccess; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,7 +35,7 @@
 			files = (
 				A76DC18029C2577100F76747 /* Domain in Frameworks */,
 				A76DC18229C2577100F76747 /* Presentation in Frameworks */,
-				A76DC17E29C2577100F76747 /* DataAcess in Frameworks */,
+				A7E99F9329C3BABA00D9E0C0 /* DataAccess in Frameworks */,
 				A796149029C26E3700145BFE /* Common in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,8 +47,9 @@
 			isa = PBXGroup;
 			children = (
 				A796148D29C26E2E00145BFE /* Common */,
-				A76DC17929C2572E00F76747 /* DataAcess */,
 				A76DC17B29C2572E00F76747 /* Domain */,
+				A7E99F9129C3B0D000D9E0C0 /* DataAccess */,
+				A7CB89A029C2994800D2EC35 /* Networking */,
 				A76DC17A29C2572E00F76747 /* Presentation */,
 				A76DC16A29C2564B00F76747 /* CleanMVVM */,
 				A76DC16929C2564B00F76747 /* Products */,
@@ -105,10 +107,10 @@
 			);
 			name = CleanMVVM;
 			packageProductDependencies = (
-				A76DC17D29C2577100F76747 /* DataAcess */,
 				A76DC17F29C2577100F76747 /* Domain */,
 				A76DC18129C2577100F76747 /* Presentation */,
 				A796148F29C26E3700145BFE /* Common */,
+				A7E99F9229C3BABA00D9E0C0 /* DataAccess */,
 			);
 			productName = CleanMVVM;
 			productReference = A76DC16829C2564B00F76747 /* CleanMVVM.app */;
@@ -367,10 +369,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A76DC17D29C2577100F76747 /* DataAcess */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DataAcess;
-		};
 		A76DC17F29C2577100F76747 /* Domain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Domain;
@@ -382,6 +380,10 @@
 		A796148F29C26E3700145BFE /* Common */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Common;
+		};
+		A7E99F9229C3BABA00D9E0C0 /* DataAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DataAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

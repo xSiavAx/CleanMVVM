@@ -5,13 +5,13 @@ public protocol LoginUseCase {
 }
 
 public class DefaultLoginUseCase: LoginUseCase {
-    private let loginApi: LoginApi
+    private let repository: AuthRepository
     
-    init(loginApi: LoginApi) {
-        self.loginApi = loginApi
+    init(repository: AuthRepository) {
+        self.repository = repository
     }
     
     public func execute(credentials: Credentials) async throws {
-        try await loginApi.login(credentials)
+        try await repository.login(credentials)
     }
 }
