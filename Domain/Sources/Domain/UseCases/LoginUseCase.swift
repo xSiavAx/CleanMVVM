@@ -7,7 +7,7 @@ public protocol LoginUseCase {
 public class DefaultLoginUseCase: LoginUseCase {
     private let repository: AuthRepository
     
-    init(repository: AuthRepository) {
+    public init(repository: AuthRepository) {
         self.repository = repository
     }
     

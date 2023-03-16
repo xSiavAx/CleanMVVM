@@ -7,18 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A76DC16C29C2564B00F76747 /* CleanMVVMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76DC16B29C2564B00F76747 /* CleanMVVMApp.swift */; };
 		A76DC17029C2564C00F76747 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A76DC16F29C2564C00F76747 /* Assets.xcassets */; };
 		A76DC17329C2564C00F76747 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A76DC17229C2564C00F76747 /* Preview Assets.xcassets */; };
 		A76DC18029C2577100F76747 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = A76DC17F29C2577100F76747 /* Domain */; };
 		A76DC18229C2577100F76747 /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = A76DC18129C2577100F76747 /* Presentation */; };
 		A796149029C26E3700145BFE /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = A796148F29C26E3700145BFE /* Common */; };
 		A7E99F9329C3BABA00D9E0C0 /* DataAccess in Frameworks */ = {isa = PBXBuildFile; productRef = A7E99F9229C3BABA00D9E0C0 /* DataAccess */; };
+		A7E99F9629C3CD7B00D9E0C0 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E99F9529C3CD7B00D9E0C0 /* AppDIContainer.swift */; };
+		A7E99F9829C3CDBB00D9E0C0 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E99F9729C3CDBB00D9E0C0 /* AppFlowCoordinator.swift */; };
+		A7E99F9A29C3CE6100D9E0C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E99F9929C3CE6100D9E0C0 /* AppDelegate.swift */; };
+		A7E99F9D29C3D64A00D9E0C0 /* LoginDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E99F9C29C3D64A00D9E0C0 /* LoginDIContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A76DC16829C2564B00F76747 /* CleanMVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanMVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A76DC16B29C2564B00F76747 /* CleanMVVMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanMVVMApp.swift; sourceTree = "<group>"; };
 		A76DC16F29C2564C00F76747 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A76DC17229C2564C00F76747 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A76DC17A29C2572E00F76747 /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Presentation; path = ../Presentation; sourceTree = "<group>"; };
@@ -26,6 +28,10 @@
 		A796148D29C26E2E00145BFE /* Common */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Common; path = ../Common; sourceTree = "<group>"; };
 		A7CB89A029C2994800D2EC35 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Networking; path = ../Networking; sourceTree = "<group>"; };
 		A7E99F9129C3B0D000D9E0C0 /* DataAccess */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DataAccess; path = ../DataAccess; sourceTree = "<group>"; };
+		A7E99F9529C3CD7B00D9E0C0 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
+		A7E99F9729C3CDBB00D9E0C0 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
+		A7E99F9929C3CE6100D9E0C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A7E99F9C29C3D64A00D9E0C0 /* LoginDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDIContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +74,9 @@
 		A76DC16A29C2564B00F76747 /* CleanMVVM */ = {
 			isa = PBXGroup;
 			children = (
-				A76DC16B29C2564B00F76747 /* CleanMVVMApp.swift */,
+				A7E99F9429C3CD6A00D9E0C0 /* DI Containers */,
+				A7E99F9729C3CDBB00D9E0C0 /* AppFlowCoordinator.swift */,
+				A7E99F9929C3CE6100D9E0C0 /* AppDelegate.swift */,
 				A76DC16F29C2564C00F76747 /* Assets.xcassets */,
 				A76DC17129C2564C00F76747 /* Preview Content */,
 			);
@@ -88,6 +96,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A7E99F9429C3CD6A00D9E0C0 /* DI Containers */ = {
+			isa = PBXGroup;
+			children = (
+				A7E99F9529C3CD7B00D9E0C0 /* AppDIContainer.swift */,
+				A7E99F9C29C3D64A00D9E0C0 /* LoginDIContainer.swift */,
+			);
+			path = "DI Containers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,7 +183,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A76DC16C29C2564B00F76747 /* CleanMVVMApp.swift in Sources */,
+				A7E99F9A29C3CE6100D9E0C0 /* AppDelegate.swift in Sources */,
+				A7E99F9629C3CD7B00D9E0C0 /* AppDIContainer.swift in Sources */,
+				A7E99F9829C3CDBB00D9E0C0 /* AppFlowCoordinator.swift in Sources */,
+				A7E99F9D29C3D64A00D9E0C0 /* LoginDIContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,7 +318,6 @@
 				DEVELOPMENT_TEAM = 3W67N7QUBL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -327,7 +346,6 @@
 				DEVELOPMENT_TEAM = 3W67N7QUBL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

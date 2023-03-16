@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject
-    var viewModel = LoginViewModel(loginUseCase: DummyLoginUseCase())
+    var viewModel: LoginViewModel
     
     var body: some View {
         Form {
@@ -40,6 +40,11 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(
+            viewModel: .init(
+                loginUseCase: DummyLoginUseCase(),
+                onFinish: {}
+            )
+        )
     }
 }

@@ -16,9 +16,14 @@ final class LoginViewModel: ObservableObject, AsyncExecutor, ErrorAlertProcessor
     var password = "testtest"
     
     private var loginUseCase: LoginUseCase
+    private var onFinish: () -> Void
     
-    init(loginUseCase: LoginUseCase) {
+    init(
+        loginUseCase: LoginUseCase,
+        onFinish: @escaping () -> Void
+    ) {
         self.loginUseCase = loginUseCase
+        self.onFinish = onFinish
     }
     
     func didTapLogin() {
@@ -40,6 +45,7 @@ final class LoginViewModel: ObservableObject, AsyncExecutor, ErrorAlertProcessor
     @MainActor
     private func login() async throws {
         try await loginUseCase.execute(credentials: .init(email: login, password: password))
+        onFinish()
     }
 }
 
