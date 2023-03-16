@@ -2,18 +2,18 @@ import Foundation
 import Common
 import Domain
 
-final class LoginViewModel: ObservableObject, AsyncExecutor, ErrorAlertProcessor {
+final class LoginViewModel: ObservableObject, AsyncExecutor, ErrorAlertProcessor, DimmingProcessor {
     @Published
     var errorAlert: ErrorAlertContext?
+    
+    @Published
+    var isDimmed = false
     
     @Published
     var login = "mail@siava.pp.ua"
     
     @Published
     var password = "testtest"
-    
-    @Published
-    var isDimmed = false
     
     private var loginUseCase: LoginUseCase
     
@@ -23,7 +23,9 @@ final class LoginViewModel: ObservableObject, AsyncExecutor, ErrorAlertProcessor
     
     func didTapLogin() {
         runTask { [weak self] in
-            try await self?.login()
+            try await self?.withDimming {
+                try await self?.login()
+            }
         }
     }
     
@@ -37,8 +39,6 @@ final class LoginViewModel: ObservableObject, AsyncExecutor, ErrorAlertProcessor
     
     @MainActor
     private func login() async throws {
-        isDimmed = true
-        defer { isDimmed = false }
         try await loginUseCase.execute(credentials: .init(email: login, password: password))
     }
 }
