@@ -1,32 +1,29 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "Presentation",
+    name: "Networking",
     platforms: [.iOS(.v14), .macOS(.v11)],
     products: [
         .library(
-            name: "Presentation",
-            targets: ["Presentation"]
-        ),
+            name: "Networking",
+            targets: ["Networking"]
+        )
     ],
     dependencies: [
         .package(path: "Common"),
-        .package(path: "Domain"),
     ],
     targets: [
         .target(
-            name: "Presentation",
+            name: "Networking",
             dependencies: [
                 "Common",
-                "Domain"
-            ]
-        ),
+            ]),
         .testTarget(
-            name: "PresentationTests",
-            dependencies: ["Presentation"]
-        ),
+            name: "NetworkingTests",
+            dependencies: ["Networking"]
+        )
     ]
 )

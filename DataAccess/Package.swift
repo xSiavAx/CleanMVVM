@@ -4,29 +4,26 @@
 import PackageDescription
 
 let package = Package(
-    name: "Presentation",
+    name: "DataAccess",
     platforms: [.iOS(.v14), .macOS(.v11)],
     products: [
         .library(
-            name: "Presentation",
-            targets: ["Presentation"]
-        ),
+            name: "DataAccess",
+            targets: ["DataAccess"]),
     ],
     dependencies: [
         .package(path: "Common"),
-        .package(path: "Domain"),
+        .package(path: "Networking"),
     ],
     targets: [
         .target(
-            name: "Presentation",
+            name: "DataAccess",
             dependencies: [
                 "Common",
-                "Domain"
-            ]
-        ),
+                "Networking"
+            ]),
         .testTarget(
-            name: "PresentationTests",
-            dependencies: ["Presentation"]
-        ),
+            name: "DataAccessTests",
+            dependencies: ["DataAccess"]),
     ]
 )
