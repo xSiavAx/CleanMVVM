@@ -16,13 +16,16 @@ final class LoginViewModel: ObservableObject, AsyncExecutor, ErrorAlertProcessor
     var password = "testtest"
     
     private var loginUseCase: LoginUseCase
+    private var registerUseCase: RegisterUseCase
     private var onFinish: () -> Void
     
     init(
         loginUseCase: LoginUseCase,
+        registerUseCase: RegisterUseCase,
         onFinish: @escaping () -> Void
     ) {
         self.loginUseCase = loginUseCase
+        self.registerUseCase = registerUseCase
         self.onFinish = onFinish
     }
     
@@ -35,10 +38,10 @@ final class LoginViewModel: ObservableObject, AsyncExecutor, ErrorAlertProcessor
     }
     
     func didTapRegister() {
-        isDimmed = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-            self.isDimmed = false
+        runTask { [weak self] in
+            try await self?.withDimming {
+                try await self?.register()
+            }
         }
     }
     
@@ -47,9 +50,15 @@ final class LoginViewModel: ObservableObject, AsyncExecutor, ErrorAlertProcessor
         try await loginUseCase.execute(credentials: .init(email: login, password: password))
         onFinish()
     }
+    
+    @MainActor
+    private func register() async throws {
+        try await registerUseCase.execute(credentials: .init(email: login, password: password))
+        onFinish()
+    }
 }
 
-class DummyLoginUseCase: LoginUseCase {
+class DummyAuthUseCase: LoginUseCase, RegisterUseCase {
     func execute(credentials: Credentials) async throws {
         throw NSError(domain: "TestDomain", code: -1)
     }

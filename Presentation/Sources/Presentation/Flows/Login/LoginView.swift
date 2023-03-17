@@ -42,9 +42,11 @@ struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView(
             viewModel: .init(
-                loginUseCase: DummyLoginUseCase(),
+                loginUseCase: DummyAuthUseCase(),
+                registerUseCase: DummyAuthUseCase(),
                 onFinish: {}
             )
         )
     }
 }
+

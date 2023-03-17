@@ -5,6 +5,7 @@ import Domain
 
 public protocol LoginFlowCoordinatorDependencies {
     func makeLoginUseCase() -> LoginUseCase
+    func makeRegisterUseCase() -> RegisterUseCase
 }
 
 public final class LoginFlowCoordinator {
@@ -21,8 +22,9 @@ public final class LoginFlowCoordinator {
     }
     
     public func start(onFinish: @escaping () -> Void) {
-        let loginUseCase = dependencies.makeLoginUseCase()
-        let view = LoginView(viewModel: .init(loginUseCase: loginUseCase, onFinish: onFinish))
+        let login = dependencies.makeLoginUseCase()
+        let register = dependencies.makeRegisterUseCase()
+        let view = LoginView(viewModel: .init(loginUseCase: login, registerUseCase: register, onFinish: onFinish))
 
         navigationController.viewControllers = [UIHostingController(rootView: view)]
     }

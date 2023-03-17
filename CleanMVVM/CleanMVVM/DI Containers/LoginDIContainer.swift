@@ -7,6 +7,12 @@ import UIKit
 
 final class LoginDIContainer {
     private let requestBuilder: PreparedDataTransferCallBuilding
+    private lazy var repository = DefaultAuthRepository(
+        requestBuilder: requestBuilder,
+        authStorage: KeyValueDataManagingStorage(
+            manager: UserDefaults.standard // Definitely in real app we should use other storage than UserDefaults
+        )
+    )
     
     init(requestBuilder: PreparedDataTransferCallBuilding) {
         self.requestBuilder = requestBuilder
@@ -22,7 +28,10 @@ final class LoginDIContainer {
 
 extension LoginDIContainer: LoginFlowCoordinatorDependencies {
     func makeLoginUseCase() -> LoginUseCase {
-        let repository = DefaultAuthRepository(requestBuilder: requestBuilder)
         return DefaultLoginUseCase(repository: repository)
+    }
+    
+    func makeRegisterUseCase() -> RegisterUseCase {
+        return DefaultRegisterUseCase(repository: repository)
     }
 }
