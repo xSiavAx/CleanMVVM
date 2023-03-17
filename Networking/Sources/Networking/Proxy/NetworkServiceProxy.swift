@@ -30,6 +30,7 @@ public extension NetworkProxing {
     
     func request(_ request: URLRequest) async throws -> Success {
         do {
+            mapper.prepare(request)
             let result = try await service.request(request)
             
             return try mapper.flatMap(success: result, for: request).trySuccess()
