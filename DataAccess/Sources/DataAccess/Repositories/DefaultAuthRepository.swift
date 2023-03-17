@@ -28,4 +28,8 @@ public final class DefaultAuthRepository: AuthRepository {
     public func save(authToken: String) async throws {
         try await authStorage.set(value: authToken, for: Self.key)
     }
+    
+    public func authToken() async throws -> String? {
+        return try await authStorage.value(for: Self.key)
+    }
 }

@@ -2,6 +2,8 @@ import Foundation
 import Common
 import Domain
 
+// If we decide to split this screen into 2 – login and register,
+// we definitely can reuse view and could try to reuse view model (as far as business logic incapsulated into abstract UseCase)
 final class LoginViewModel: ObservableObject, AsyncExecutor, ErrorAlertProcessor, DimmingProcessor {
     @Published
     var errorAlert: ErrorAlertContext?

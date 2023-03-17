@@ -27,6 +27,10 @@ final class LoginDIContainer {
 }
 
 extension LoginDIContainer: LoginFlowCoordinatorDependencies {
+    func makeCheckAuthorizationUseCase() -> CheckAuthorizationUseCase {
+        return DefaultCheckAuthorizationUseCase(repository: repository)
+    }
+    
     func makeLoginUseCase() -> LoginUseCase {
         return DefaultLoginUseCase(repository: repository)
     }

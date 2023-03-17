@@ -3,7 +3,7 @@ import Common
 
 public protocol KeyValueStorage {
     func value<T>(for key: String) async throws -> T?
-    func set<T>(value: T?, for key: String) async throws
+    func set(value: Any?, for key: String) async throws
 }
 
 public enum KeyValueDataManagingStorageError: Error {
@@ -35,7 +35,7 @@ public final class KeyValueDataManagingStorage: KeyValueStorage {
         }
     }
     
-    public func set<T>(value: T?, for key: String) async throws {
+    public func set(value: Any?, for key: String) async throws {
         try await withCheckedThrowingContinuation { [manager] continuation in
             DispatchQueue.bg.async {
                 do {
