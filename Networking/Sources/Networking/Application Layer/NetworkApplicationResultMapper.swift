@@ -7,9 +7,14 @@ public class NetworkApplicationResultMapper: NetworkResultMapper {
     public typealias ToFail = NetworkApplicationError
     
     public let logger: NetworkApplicationLogger
+    public let acceptableStatusCodes: Set<Int>
     
-    public init(logger: NetworkApplicationLogger = DefaultNetworkApplicationLogger()) {
+    public init(
+        acceptableStatusCodes: Set<Int> = .init(HTTPURLResponse.successStatusCodes),
+        logger: NetworkApplicationLogger = DefaultNetworkApplicationLogger()
+    ) {
         self.logger = logger
+        self.acceptableStatusCodes = acceptableStatusCodes
     }
     
     public func prepare(_ request: URLRequest) {
@@ -31,13 +36,13 @@ public class NetworkApplicationResultMapper: NetworkResultMapper {
     private func statusCodeError(in response: NetworkTransportResponse) -> NetworkApplicationError? {
         let statusCode = response.httpResponse.statusCode
         
-        if HTTPURLResponse.successStatusCodes.contains(statusCode) {
+        if acceptableStatusCodes.contains(statusCode) {
             return nil
         }
         return .http(statusCode: statusCode, data: response.data)
     }
 }
 
-private extension HTTPURLResponse {
+public extension HTTPURLResponse {
     static let successStatusCodes = 200...299
 }

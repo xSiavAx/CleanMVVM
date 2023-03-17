@@ -2,7 +2,7 @@ import Foundation
 import Networking
 import Domain
 
-final class RegisterCall: DataTransferCall<Void> {
+final class RegisterCall: DataTransferCall<RegisterResponseDTO> {
     init(credentials: Credentials) {
         super.init(
             path: .api("register"),

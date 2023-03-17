@@ -16,14 +16,13 @@ public final class DefaultAuthRepository: AuthRepository {
     // MARK: - AuthRepository
     
     public func login(_ credentials: Credentials) async throws -> String {
-        let response = try await requestBuilder.build(LoginCall(credentials: credentials)).perform()
-        // Map errors here if needed
-        return response.token
+        // Map errors to domain here if needed
+        try await requestBuilder.build(LoginCall(credentials: credentials)).perform().toDomain()
     }
     
     public func register(_ credentials: Credentials) async throws {
-        // Map errors here if needed
-        try await requestBuilder.build(RegisterCall(credentials: credentials)).perform()
+        // Map errors to domain here if needed
+        try await requestBuilder.build(RegisterCall(credentials: credentials)).perform().toDomain()
     }
     
     public func save(authToken: String) async throws {
