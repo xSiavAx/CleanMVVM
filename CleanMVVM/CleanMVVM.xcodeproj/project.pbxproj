@@ -11,6 +11,7 @@
 		A76DC17329C2564C00F76747 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A76DC17229C2564C00F76747 /* Preview Assets.xcassets */; };
 		A76DC18029C2577100F76747 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = A76DC17F29C2577100F76747 /* Domain */; };
 		A76DC18229C2577100F76747 /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = A76DC18129C2577100F76747 /* Presentation */; };
+		A78C55DE29C8EABC00BE8A23 /* TasksDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78C55DD29C8EABC00BE8A23 /* TasksDIContainer.swift */; };
 		A796149029C26E3700145BFE /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = A796148F29C26E3700145BFE /* Common */; };
 		A7E99F9329C3BABA00D9E0C0 /* DataAccess in Frameworks */ = {isa = PBXBuildFile; productRef = A7E99F9229C3BABA00D9E0C0 /* DataAccess */; };
 		A7E99F9629C3CD7B00D9E0C0 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E99F9529C3CD7B00D9E0C0 /* AppDIContainer.swift */; };
@@ -25,6 +26,7 @@
 		A76DC17229C2564C00F76747 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A76DC17A29C2572E00F76747 /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Presentation; path = ../Presentation; sourceTree = "<group>"; };
 		A76DC17B29C2572E00F76747 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Domain; path = ../Domain; sourceTree = "<group>"; };
+		A78C55DD29C8EABC00BE8A23 /* TasksDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksDIContainer.swift; sourceTree = "<group>"; };
 		A796148D29C26E2E00145BFE /* Common */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Common; path = ../Common; sourceTree = "<group>"; };
 		A7CB89A029C2994800D2EC35 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Networking; path = ../Networking; sourceTree = "<group>"; };
 		A7E99F9129C3B0D000D9E0C0 /* DataAccess */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DataAccess; path = ../DataAccess; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			children = (
 				A7E99F9529C3CD7B00D9E0C0 /* AppDIContainer.swift */,
 				A7E99F9C29C3D64A00D9E0C0 /* LoginDIContainer.swift */,
+				A78C55DD29C8EABC00BE8A23 /* TasksDIContainer.swift */,
 			);
 			path = "DI Containers";
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				A7E99F9629C3CD7B00D9E0C0 /* AppDIContainer.swift in Sources */,
 				A7E99F9829C3CDBB00D9E0C0 /* AppFlowCoordinator.swift in Sources */,
 				A7E99F9D29C3D64A00D9E0C0 /* LoginDIContainer.swift in Sources */,
+				A78C55DE29C8EABC00BE8A23 /* TasksDIContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

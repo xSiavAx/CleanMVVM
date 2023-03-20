@@ -6,12 +6,17 @@ final class AppFlowCoordinator {
     private let navigationController: UINavigationController
     private let appDIContainer = AppDIContainer()
     private var loginCoordinator: LoginFlowCoordinator?
+    private var tasksCoordinator: TasksFlowCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
     func start() {
+        showLoginScreen()
+    }
+    
+    private func showLoginScreen() {
         let loginDIContainer = appDIContainer.makeLoginDIContainer()
         
         loginCoordinator = loginDIContainer.makeLoginFlowCoordinator(navigationController: navigationController)
@@ -23,10 +28,13 @@ final class AppFlowCoordinator {
     }
     
     private func showMainScreen() {
-        let stub = UIViewController()
+        let tasksDIContainer = appDIContainer.makeTasksDIContainer()
         
-        stub.view.backgroundColor = .orange
+        tasksCoordinator = tasksDIContainer.makeTasksFlowCoordinator(navigationController: navigationController)
         
-        navigationController.viewControllers = [stub]
+        tasksCoordinator?.start { [weak self] in
+            self?.tasksCoordinator = nil
+            self?.showLoginScreen()
+        }
     }
 }
