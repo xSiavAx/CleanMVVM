@@ -7,7 +7,7 @@ import UIKit
 
 final class TasksDIContainer {
     private let requestBuilder: PreparedDataTransferCallBuilding
-    private lazy var repository = DefaultAuthRepository(
+    private lazy var authRepository = DefaultAuthRepository(
         requestBuilder: requestBuilder,
         authStorage: KeyValueDataManagingStorage(
             manager: UserDefaults.standard // Definitely in real app we should use other storage than UserDefaults
@@ -27,5 +27,7 @@ final class TasksDIContainer {
 }
 
 extension TasksDIContainer: TasksFlowCoordinatorDependencies {
-
+    func makeLogoutUseCase() -> LogoutUseCase {
+        return DefaultLogoutUseCase(repository: authRepository)
+    }
 }

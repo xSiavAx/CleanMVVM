@@ -4,7 +4,7 @@ import SwiftUI
 import Domain
 
 public protocol TasksFlowCoordinatorDependencies {
-
+    func makeLogoutUseCase() -> LogoutUseCase
 }
 
 public final class TasksFlowCoordinator {
@@ -26,7 +26,11 @@ public final class TasksFlowCoordinator {
     }
     
     private func showTaskList() {
-        let viewModel = TaskListViewModel()
+        let viewModel = TaskListViewModel(
+            logoutUseCase: dependencies.makeLogoutUseCase()
+        ) { [weak self] in
+            self?.finish()
+        }
         setRootView(TaskListView(viewModel: viewModel))
     }
         
