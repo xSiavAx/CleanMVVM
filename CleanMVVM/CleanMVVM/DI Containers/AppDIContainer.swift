@@ -18,6 +18,10 @@ final class AppDIContainer {
     private lazy var requestBuilder = PreparedDataTransferCallBuilder(service: networkService, config: .appDefault)
     
     func makeLoginDIContainer() -> LoginDIContainer {
-        return LoginDIContainer(requestBuilder: requestBuilder)
+        return .init(requestBuilder: requestBuilder)
+    }
+    
+    func makeTasksDIContainer() -> TasksDIContainer {
+        return .init(requestBuilder: requestBuilder)
     }
 }
