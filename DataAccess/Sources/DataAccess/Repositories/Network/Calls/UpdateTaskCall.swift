@@ -6,7 +6,7 @@ final class UpdateTaskCall: DataTransferCall<ErrorResponseDTO> {
     init(token: String, task: TodoTask) {
         super.init(
             path: .api("task/update"),
-            method: .get,
+            method: .post,
             headers: .authorization(token),
             body: task
         )

@@ -6,6 +6,7 @@ import Domain
 public protocol TasksFlowCoordinatorDependencies {
     func makeLogoutUseCase() -> LogoutUseCase
     func makeUpgradeTaskStatusUseCase() -> UpgradeTaskStatusUseCase
+    func makeDeleteTaskStatusUseCase() -> DeleteTasksUseCase
     func makeTaskListRepository() -> TaskListRepository
 }
 
@@ -31,7 +32,8 @@ public final class TasksFlowCoordinator {
         let viewModel = TaskListViewModel(
             useCases: .init(
                 logout: dependencies.makeLogoutUseCase(),
-                upgradeTaskStatus: dependencies.makeUpgradeTaskStatusUseCase()
+                upgradeTaskStatus: dependencies.makeUpgradeTaskStatusUseCase(),
+                delete: dependencies.makeDeleteTaskStatusUseCase()
             ),
             taskListRepository: dependencies.makeTaskListRepository(),
             onFinish: { [weak self] in self?.finish() }

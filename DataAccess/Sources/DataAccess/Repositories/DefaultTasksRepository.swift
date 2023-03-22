@@ -13,7 +13,8 @@ public final class DefaultTasksRepository: FetchTaskRepository, TasksRepository 
     
     public func fetch() async throws -> [TodoTask] {
         let token = try await requiredToken()
-        let response = try await requestBuilder.build(FetchTasksCall(token: token)).perform()
+        let call = FetchTasksCall(token: token)
+        let response = try await requestBuilder.build(call).perform()
         
         return try response.toDomain()
     }
@@ -27,8 +28,21 @@ public final class DefaultTasksRepository: FetchTaskRepository, TasksRepository 
     
     public func update(task: TodoTask) async throws {
         let token = try await requiredToken()
-        let response = try await requestBuilder.build(UpdateTaskCall(token: token, task: task)).perform()
+        let call = UpdateTaskCall(token: token, task: task)
+        let response = try await requestBuilder.build(call).perform()
         
         try response.requireNoError()
     }
+    
+    public func removeTasks(ids: [TodoTask.ID]) async throws {
+        let token = try await requiredToken()
+        
+        for id in ids {
+            let call = DeleteTaskCall(token: token, id: id)
+            let response = try await requestBuilder.build(call).perform()
+            
+            try response.requireNoError()
+        }
+    }
+    
 }

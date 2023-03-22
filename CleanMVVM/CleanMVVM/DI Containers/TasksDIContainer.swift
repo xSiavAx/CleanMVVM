@@ -40,6 +40,10 @@ extension TasksDIContainer: TasksFlowCoordinatorDependencies {
         )
     }
     
+    func makeDeleteTaskStatusUseCase() -> DeleteTasksUseCase {
+        return DefaultDeleteTasksUseCase(taskRepo: taskListRepository)
+    }
+    
     func makeTaskListRepository() -> TaskListRepository {
         return taskListRepository
     }

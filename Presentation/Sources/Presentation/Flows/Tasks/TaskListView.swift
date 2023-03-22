@@ -6,8 +6,8 @@ struct TaskListView: View {
     var viewModel: TaskListViewModel
     
     var body: some View {
-        Group {
-            List(viewModel.tasks) { row in
+        List {
+            ForEach(viewModel.tasks) { row in
                 HStack {
                     Text(row.title)
                     Spacer()
@@ -16,6 +16,7 @@ struct TaskListView: View {
                     }
                 }
             }
+            .onDelete { viewModel.deleteTasks(at: $0) }
         }
         .background(Color.white)
         .toolbar {

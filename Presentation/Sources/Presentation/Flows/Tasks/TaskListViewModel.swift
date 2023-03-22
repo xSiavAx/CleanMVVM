@@ -9,6 +9,7 @@ final class TaskListViewModel: ObservableObject, AsyncExecutor, ErrorAlertProces
     struct UseCases {
         let logout: LogoutUseCase
         let upgradeTaskStatus: UpgradeTaskStatusUseCase
+        let delete: DeleteTasksUseCase
     }
     struct TaskRow: Identifiable {
         let id: Int
@@ -23,7 +24,6 @@ final class TaskListViewModel: ObservableObject, AsyncExecutor, ErrorAlertProces
     
     @Published
     var tasks: [TaskRow] = []
-    
     
     private let useCases: UseCases
     private let taskListRepository: TaskListRepository
@@ -69,6 +69,14 @@ final class TaskListViewModel: ObservableObject, AsyncExecutor, ErrorAlertProces
         }
     }
     
+    func deleteTasks(at indexes: IndexSet) {
+        let ids = indexes.map { tasks[$0].id }
+        
+        runTask { [weak self] in
+            try await self?.useCases.delete.execute(ids: ids)
+        }
+    }
+    
     @MainActor
     private func logout() async throws {
         try await useCases.logout.execute()
@@ -82,12 +90,10 @@ fileprivate extension TodoTask {
     }
 }
 
-final class DummyLogoutUseCase: LogoutUseCase {
+fileprivate final class DummyUseCase: LogoutUseCase, UpgradeTaskStatusUseCase, DeleteTasksUseCase {
     func execute() async throws {}
-}
-
-final class DummyUpgradeTaskStatusUseCase: UpgradeTaskStatusUseCase {
     func execute(id: TodoTask.ID, oldStatus: TodoTask.Status) async throws {}
+    func execute(ids: [TodoTask.ID]) async throws {}
 }
 
 final class DummyTaskListRepository: TaskListRepository {
@@ -106,8 +112,9 @@ extension TaskListViewModel {
     static func forPreview() -> Self {
         return .init(
             useCases: .init(
-                logout: DummyLogoutUseCase(),
-                upgradeTaskStatus: DummyUpgradeTaskStatusUseCase()
+                logout: DummyUseCase(),
+                upgradeTaskStatus: DummyUseCase(),
+                delete: DummyUseCase()
             ),
             taskListRepository: DummyTaskListRepository(),
             onFinish: {}
