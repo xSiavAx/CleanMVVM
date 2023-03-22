@@ -5,6 +5,7 @@ import Domain
 
 public protocol TasksFlowCoordinatorDependencies {
     func makeLogoutUseCase() -> LogoutUseCase
+    func makeTaskListRepository() -> TaskListRepository
 }
 
 public final class TasksFlowCoordinator {
@@ -27,7 +28,8 @@ public final class TasksFlowCoordinator {
     
     private func showTaskList() {
         let viewModel = TaskListViewModel(
-            logoutUseCase: dependencies.makeLogoutUseCase()
+            logoutUseCase: dependencies.makeLogoutUseCase(),
+            taskListRepository: dependencies.makeTaskListRepository()
         ) { [weak self] in
             self?.finish()
         }

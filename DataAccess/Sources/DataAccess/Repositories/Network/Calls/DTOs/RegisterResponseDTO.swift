@@ -1,8 +1,10 @@
 import Foundation
 
 struct RegisterResponseDTO: Codable, ErrorContainingResponse, PasswordResponse {
-    var details: String?
-    var password: [String]?
+    let details: String?
+    let detail: String?
+    
+    let password: [String]?
     
     func toDomain() throws {
         try requireNoError()

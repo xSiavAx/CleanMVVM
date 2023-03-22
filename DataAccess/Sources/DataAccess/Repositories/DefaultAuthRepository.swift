@@ -5,8 +5,8 @@ import Domain
 public final class DefaultAuthRepository: AuthRepository {
     static let key = "auth_key"
     
-    private var requestBuilder: PreparedDataTransferCallBuilding
-    private var authStorage: KeyValueStorage
+    private let requestBuilder: PreparedDataTransferCallBuilding
+    private let authStorage: KeyValueStorage
     
     public init(requestBuilder: PreparedDataTransferCallBuilding, authStorage: KeyValueStorage) {
         self.requestBuilder = requestBuilder
