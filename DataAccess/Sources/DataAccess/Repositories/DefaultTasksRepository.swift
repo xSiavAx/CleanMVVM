@@ -2,7 +2,7 @@ import Foundation
 import Domain
 import Networking
 
-public final class DefaultTasksRepository: FetchTaskRepository {
+public final class DefaultTasksRepository: FetchTaskRepository, TasksRepository {
     private let authRepository: AuthRepository
     private let requestBuilder: PreparedDataTransferCallBuilding
     
@@ -23,5 +23,12 @@ public final class DefaultTasksRepository: FetchTaskRepository {
             throw CommunicationError.unauthorized
         }
         return token
+    }
+    
+    public func update(task: TodoTask) async throws {
+        let token = try await requiredToken()
+        let response = try await requestBuilder.build(UpdateTaskCall(token: token, task: task)).perform()
+        
+        try response.requireNoError()
     }
 }

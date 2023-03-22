@@ -10,7 +10,7 @@ public struct TodoTask: Hashable, Codable, Identifiable {
     public let id: Int
     public let title: String
     public let content: String
-    public let status: Status
+    public var status: Status
     
     public init(id: Int, title: String, content: String, status: TodoTask.Status) {
         self.id = id

@@ -12,7 +12,7 @@ struct TaskListView: View {
                     Text(row.title)
                     Spacer()
                     statusButton(status: row.status) {
-                        print("Change status")
+                        viewModel.didTapStatus(taskID: row.id, status: row.status)
                     }
                 }
             }
@@ -68,11 +68,7 @@ fileprivate extension TodoTask.Status {
 struct TaskListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            TaskListView(viewModel: .init(
-                logoutUseCase: DummyLogoutUseCase(),
-                taskListRepository: DummyTaskListRepository(),
-                onFinish: {}
-            ))
+            TaskListView(viewModel: .forPreview())
         }
     }
 }

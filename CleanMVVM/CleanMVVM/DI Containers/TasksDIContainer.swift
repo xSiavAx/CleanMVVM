@@ -14,7 +14,7 @@ final class TasksDIContainer {
         )
     )
     private lazy var tasksRepository = DefaultTasksRepository(authRepository: authRepository, requestBuilder: requestBuilder)
-    private lazy var taskListRepository = RamTasksListRepository(dataSource: tasksRepository)
+    private lazy var taskListRepository = RamTasksListRepository(dataSource: tasksRepository, tasksRepository: tasksRepository)
     
     init(requestBuilder: PreparedDataTransferCallBuilding) {
         self.requestBuilder = requestBuilder
@@ -31,6 +31,13 @@ final class TasksDIContainer {
 extension TasksDIContainer: TasksFlowCoordinatorDependencies {
     func makeLogoutUseCase() -> LogoutUseCase {
         return DefaultLogoutUseCase(repository: authRepository)
+    }
+    
+    func makeUpgradeTaskStatusUseCase() -> UpgradeTaskStatusUseCase {
+        return DefaultUpgradeTaskStatusUseCase(
+            taskStorage: taskListRepository,
+            taskRepo: taskListRepository
+        )
     }
     
     func makeTaskListRepository() -> TaskListRepository {
