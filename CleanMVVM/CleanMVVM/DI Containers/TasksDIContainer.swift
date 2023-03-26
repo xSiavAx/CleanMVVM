@@ -14,7 +14,7 @@ final class TasksDIContainer {
         )
     )
     private lazy var tasksRepository = DefaultTasksRepository(authRepository: authRepository, requestBuilder: requestBuilder)
-    private lazy var taskListRepository = RamTasksListRepository(dataSource: tasksRepository, tasksRepository: tasksRepository)
+    private lazy var taskManager = TaskManager(dataSource: tasksRepository, tasksRepository: tasksRepository)
     
     init(requestBuilder: PreparedDataTransferCallBuilding) {
         self.requestBuilder = requestBuilder
@@ -35,16 +35,16 @@ extension TasksDIContainer: TasksFlowCoordinatorDependencies {
     
     func makeUpgradeTaskStatusUseCase() -> UpgradeTaskStatusUseCase {
         return DefaultUpgradeTaskStatusUseCase(
-            taskStorage: taskListRepository,
-            taskRepo: taskListRepository
+            taskStorage: taskManager,
+            taskRepo: taskManager
         )
     }
     
     func makeDeleteTaskStatusUseCase() -> DeleteTasksUseCase {
-        return DefaultDeleteTasksUseCase(taskRepo: taskListRepository)
+        return DefaultDeleteTasksUseCase(taskRepo: taskManager)
     }
     
-    func makeTaskListRepository() -> TaskListRepository {
-        return taskListRepository
+    func makeTaskListRepository() -> TaskManagerProtocol {
+        return taskManager
     }
 }

@@ -7,7 +7,7 @@ public protocol TasksFlowCoordinatorDependencies {
     func makeLogoutUseCase() -> LogoutUseCase
     func makeUpgradeTaskStatusUseCase() -> UpgradeTaskStatusUseCase
     func makeDeleteTaskStatusUseCase() -> DeleteTasksUseCase
-    func makeTaskListRepository() -> TaskListRepository
+    func makeTaskListRepository() -> TaskManagerProtocol
 }
 
 public final class TasksFlowCoordinator {

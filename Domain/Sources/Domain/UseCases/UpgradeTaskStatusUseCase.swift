@@ -5,16 +5,16 @@ public protocol UpgradeTaskStatusUseCase {
 }
 
 public final class DefaultUpgradeTaskStatusUseCase: UpgradeTaskStatusUseCase {
-    private let taskStorage: TaskStorage
+    private let taskSource: TaskSource
     private let taskRepo: TasksRepository
     
-    public init(taskStorage: TaskStorage, taskRepo: TasksRepository) {
-        self.taskStorage = taskStorage
+    public init(taskStorage: TaskSource, taskRepo: TasksRepository) {
+        self.taskSource = taskStorage
         self.taskRepo = taskRepo
     }
     
     public func execute(id: TodoTask.ID, oldStatus: TodoTask.Status) async throws {
-        if var task = try await taskStorage.task(id: id) {
+        if var task = try await taskSource.task(id: id) {
             let newStatus = oldStatus.upgraded()
             
             if newStatus != task.status {

@@ -26,13 +26,13 @@ final class TaskListViewModel: ObservableObject, AsyncExecutor, ErrorAlertProces
     var tasks: [TaskRow] = []
     
     private let useCases: UseCases
-    private let taskListRepository: TaskListRepository
+    private let taskListRepository: TaskManagerProtocol
     private let onFinish: () -> Void
     
     private var subscriptions = Set<AnyCancellable>()
     private var started = false
     
-    init(useCases: UseCases, taskListRepository: TaskListRepository, onFinish: @escaping () -> Void) {
+    init(useCases: UseCases, taskListRepository: TaskManagerProtocol, onFinish: @escaping () -> Void) {
         self.useCases = useCases
         self.taskListRepository = taskListRepository
         self.onFinish = onFinish
@@ -96,7 +96,7 @@ fileprivate final class DummyUseCase: LogoutUseCase, UpgradeTaskStatusUseCase, D
     func execute(ids: [TodoTask.ID]) async throws {}
 }
 
-final class DummyTaskListRepository: TaskListRepository {
+final class DummyTaskListRepository: TaskManagerProtocol {
     var tasks = CurrentValueSubject<[TodoTask], Never>([])
     
     func start() async throws {
