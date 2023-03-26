@@ -5,6 +5,9 @@ import Domain
 
 public protocol TasksFlowCoordinatorDependencies {
     func makeLogoutUseCase() -> LogoutUseCase
+    func makeUpgradeTaskStatusUseCase() -> UpgradeTaskStatusUseCase
+    func makeDeleteTaskStatusUseCase() -> DeleteTasksUseCase
+    func makeTaskListRepository() -> TaskManagerProtocol
 }
 
 public final class TasksFlowCoordinator {
@@ -27,10 +30,14 @@ public final class TasksFlowCoordinator {
     
     private func showTaskList() {
         let viewModel = TaskListViewModel(
-            logoutUseCase: dependencies.makeLogoutUseCase()
-        ) { [weak self] in
-            self?.finish()
-        }
+            useCases: .init(
+                logout: dependencies.makeLogoutUseCase(),
+                upgradeTaskStatus: dependencies.makeUpgradeTaskStatusUseCase(),
+                delete: dependencies.makeDeleteTaskStatusUseCase()
+            ),
+            taskListRepository: dependencies.makeTaskListRepository(),
+            onFinish: { [weak self] in self?.finish() }
+        )
         setRootView(TaskListView(viewModel: viewModel))
     }
         

@@ -13,6 +13,8 @@ final class TasksDIContainer {
             manager: UserDefaults.standard // Definitely in real app we should use other storage than UserDefaults
         )
     )
+    private lazy var tasksRepository = DefaultTasksRepository(authRepository: authRepository, requestBuilder: requestBuilder)
+    private lazy var taskManager = TaskManager(dataSource: tasksRepository, tasksRepository: tasksRepository)
     
     init(requestBuilder: PreparedDataTransferCallBuilding) {
         self.requestBuilder = requestBuilder
@@ -29,5 +31,20 @@ final class TasksDIContainer {
 extension TasksDIContainer: TasksFlowCoordinatorDependencies {
     func makeLogoutUseCase() -> LogoutUseCase {
         return DefaultLogoutUseCase(repository: authRepository)
+    }
+    
+    func makeUpgradeTaskStatusUseCase() -> UpgradeTaskStatusUseCase {
+        return DefaultUpgradeTaskStatusUseCase(
+            taskStorage: taskManager,
+            taskRepo: taskManager
+        )
+    }
+    
+    func makeDeleteTaskStatusUseCase() -> DeleteTasksUseCase {
+        return DefaultDeleteTasksUseCase(taskRepo: taskManager)
+    }
+    
+    func makeTaskListRepository() -> TaskManagerProtocol {
+        return taskManager
     }
 }

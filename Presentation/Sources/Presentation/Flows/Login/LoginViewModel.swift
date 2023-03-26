@@ -65,4 +65,3 @@ class DummyAuthUseCase: LoginUseCase, RegisterUseCase {
         throw NSError(domain: "TestDomain", code: -1)
     }
 }
-
