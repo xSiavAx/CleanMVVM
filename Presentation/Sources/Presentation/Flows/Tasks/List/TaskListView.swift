@@ -8,15 +8,20 @@ struct TaskListView: View {
     var body: some View {
         List {
             ForEach(viewModel.tasks) { row in
-                HStack {
-                    Text(row.title)
-                    Spacer()
-                    statusButton(status: row.status) {
-                        viewModel.didTapStatus(taskID: row.id, status: row.status)
+                Button(
+                    action: { viewModel.didSelectRow(id: row.id) },
+                    label: {
+                        HStack {
+                            Text(row.title)
+                            Spacer()
+                            statusButton(status: row.status) {
+                                viewModel.didTapStatus(taskID: row.id, status: row.status)
+                            }
+                        }
                     }
-                }
+                )
             }
-            .onDelete { viewModel.deleteTasks(at: $0) }
+            .onDelete { viewModel.didTapDelete(at: $0) }
         }
         .background(Color.white)
         .toolbar {
@@ -25,7 +30,7 @@ struct TaskListView: View {
             }
             ToolbarItem {
                 Button(
-                    action: { print("Tapped") },
+                    action: { viewModel.didTapCreateTask() },
                     label: { Image(systemName: "plus.circle") }
                 )
             }
