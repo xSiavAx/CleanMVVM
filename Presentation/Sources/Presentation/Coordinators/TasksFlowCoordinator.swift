@@ -5,6 +5,8 @@ import Domain
 
 public protocol TasksFlowCoordinatorDependencies {
     func makeLogoutUseCase() -> LogoutUseCase
+    func makeCreateTaskUseCase() -> EditTaskUseCase
+    func makeUpdateTaskUseCase() -> EditTaskUseCase
     func makeUpgradeTaskStatusUseCase() -> UpgradeTaskStatusUseCase
     func makeDeleteTaskStatusUseCase() -> DeleteTasksUseCase
     func makeTaskListRepository() -> TaskManagerProtocol
@@ -46,25 +48,30 @@ public final class TasksFlowCoordinator {
     }
     
     private func showCreateTask() {
-        let view = EditTaskView(viewModel: .init(
-            title: .edit,
+        let viewModel = EditTaskViewModel(
+            title: .create,
+            useCase: dependencies.makeCreateTaskUseCase(),
             onFinish: { [weak self] in self?.navigationController.popViewController(animated: true) }
-        ))
-        navigationController.pushViewController(UIHostingController(rootView: view), animated: true)
+        )
+        pushView(EditTaskView(viewModel: viewModel))
     }
 
-    
     private func showEditTask(task: TodoTask) {
-        let view = EditTaskView(viewModel: .init(
+        let viewModel = EditTaskViewModel(
             title: .edit,
             task: task,
+            useCase: dependencies.makeUpdateTaskUseCase(),
             onFinish: { [weak self] in self?.navigationController.popViewController(animated: true) }
-        ))
-        navigationController.pushViewController(UIHostingController(rootView: view), animated: true)
+        )
+        pushView(EditTaskView(viewModel: viewModel))
     }
         
     private func setRootView<V: View>(_ view: V) {
         navigationController.viewControllers = [UIHostingController(rootView: view)]
+    }
+    
+    private func pushView<V: View>(_ view: V) {
+        navigationController.pushViewController(UIHostingController(rootView: view), animated: true)
     }
     
     private func finish() {

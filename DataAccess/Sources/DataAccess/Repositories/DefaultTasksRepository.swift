@@ -26,6 +26,14 @@ public final class DefaultTasksRepository: FetchTaskRepository, TasksRepository 
         return token
     }
     
+    public func create(task: TodoTask) async throws {
+        let token = try await requiredToken()
+        let call = CreateTaskCall(token: token, task: task)
+        let response = try await requestBuilder.build(call).perform()
+        
+        try response.requireNoError()
+    }
+    
     public func update(task: TodoTask) async throws {
         let token = try await requiredToken()
         let call = UpdateTaskCall(token: token, task: task)

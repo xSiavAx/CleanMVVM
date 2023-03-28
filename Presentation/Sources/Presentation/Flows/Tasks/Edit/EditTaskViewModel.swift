@@ -21,11 +21,13 @@ final class EditTaskViewModel: ObservableObject, AsyncExecutor, ErrorAlertProces
     
     var title: Title
     
+    private let useCase: EditTaskUseCase
     private let onFinish: () -> Void
     
-    init(title: Title, task: TodoTask = .create(), onFinish: @escaping () -> Void) {
+    init(title: Title, task: TodoTask = .create(), useCase: EditTaskUseCase, onFinish: @escaping () -> Void) {
         self.title = title
         self.task = task
+        self.useCase = useCase
         self.onFinish = onFinish
     }
     
@@ -39,7 +41,8 @@ final class EditTaskViewModel: ObservableObject, AsyncExecutor, ErrorAlertProces
     
     @MainActor
     private func save() async throws {
-
+        try await useCase.execute(task: task)
+        onFinish()
     }
 }
 
@@ -47,4 +50,8 @@ fileprivate extension TodoTask {
     static func create() -> Self {
         return .init(id: -1, title: "", content: "", status: .todo)
     }
+}
+
+final class DummyEditTaskUseCase: EditTaskUseCase {
+    func execute(task: TodoTask) async throws {}
 }

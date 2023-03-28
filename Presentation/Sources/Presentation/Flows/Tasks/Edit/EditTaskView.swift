@@ -32,6 +32,7 @@ struct EditTaskView_Previews: PreviewProvider {
         NavigationView {
             EditTaskView(viewModel: .init(
                 title: .create,
+                useCase: DummyEditTaskUseCase(),
                 onFinish: {}
             ))
         }

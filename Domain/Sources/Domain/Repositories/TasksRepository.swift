@@ -5,6 +5,7 @@ public protocol FetchTaskRepository {
 }
 
 public protocol TasksRepository {
+    func create(task: TodoTask) async throws
     func update(task: TodoTask) async throws
     func removeTasks(ids: [TodoTask.ID]) async throws
 }

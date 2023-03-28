@@ -33,6 +33,14 @@ extension TasksDIContainer: TasksFlowCoordinatorDependencies {
         return DefaultLogoutUseCase(repository: authRepository)
     }
     
+    func makeCreateTaskUseCase() -> EditTaskUseCase {
+        return CreateTaskUseCase(taskRepo: taskManager)
+    }
+    
+    func makeUpdateTaskUseCase() -> EditTaskUseCase {
+        return UpdateTaskUseCase(taskRepo: taskManager)
+    }
+
     func makeUpgradeTaskStatusUseCase() -> UpgradeTaskStatusUseCase {
         return DefaultUpgradeTaskStatusUseCase(
             taskStorage: taskManager,

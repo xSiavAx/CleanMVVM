@@ -118,7 +118,7 @@ fileprivate final class DummyUseCase: LogoutUseCase, UpgradeTaskStatusUseCase, D
     func execute(ids: [TodoTask.ID]) async throws {}
 }
 
-final class DummyTaskListRepository: TaskManagerProtocol {
+final class DummyTaskManager: TaskManagerProtocol {
     var tasks = CurrentValueSubject<[TodoTask], Never>([])
     
     func start() async throws {
@@ -138,7 +138,7 @@ extension TaskListViewModel {
                 upgradeTaskStatus: DummyUseCase(),
                 delete: DummyUseCase()
             ),
-            taskListRepository: DummyTaskListRepository(),
+            taskListRepository: DummyTaskManager(),
             callBacks: .init(selectTask: { _ in }, createTask: {}, finish: {})
         )
     }
