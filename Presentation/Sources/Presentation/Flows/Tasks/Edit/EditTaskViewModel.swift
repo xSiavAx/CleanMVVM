@@ -18,6 +18,7 @@ final class EditTaskViewModel: ObservableObject, AsyncExecutor, ErrorAlertProces
     var task: TodoTask
     
     var saveEnabled: Bool { !task.title.isEmpty }
+    // Here is also shall be `&& !task.content.isEmpty`. It's intentional so, to demonstrate validation logic in UseCase
     
     var title: Title
     
