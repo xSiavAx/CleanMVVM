@@ -33,6 +33,11 @@ public final class TaskManager: TaskManagerProtocol {
 }
 
 extension TaskManager: TasksRepository {
+    public func create(task: TodoTask) async throws {
+        try await tasksRepository.create(task: task)
+        try await refetchTaskList()
+    }
+    
     public func update(task: TodoTask) async throws {
         try await tasksRepository.update(task: task)
         try await refetchTaskList()

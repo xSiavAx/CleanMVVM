@@ -6,6 +6,11 @@ import Combine
 // Generally, this view (as well as whole Flow) should be separated on Main and Tasks
 // It may help to separate logout and tasks related stuff...
 final class TaskListViewModel: ObservableObject, AsyncExecutor, ErrorAlertProcessor, DimmingProcessor {
+    struct CallBacks {
+        var selectTask: (TodoTask) -> Void
+        var createTask: () -> Void
+        var finish: () -> Void
+    }
     struct UseCases {
         let logout: LogoutUseCase
         let upgradeTaskStatus: UpgradeTaskStatusUseCase
@@ -27,15 +32,19 @@ final class TaskListViewModel: ObservableObject, AsyncExecutor, ErrorAlertProces
     
     private let useCases: UseCases
     private let taskListRepository: TaskManagerProtocol
-    private let onFinish: () -> Void
+    private let callBacks: CallBacks
     
     private var subscriptions = Set<AnyCancellable>()
     private var started = false
     
-    init(useCases: UseCases, taskListRepository: TaskManagerProtocol, onFinish: @escaping () -> Void) {
+    init(
+        useCases: UseCases,
+        taskListRepository: TaskManagerProtocol,
+        callBacks: CallBacks
+    ) {
         self.useCases = useCases
         self.taskListRepository = taskListRepository
-        self.onFinish = onFinish
+        self.callBacks = callBacks
     }
 
     func start() {
@@ -49,7 +58,9 @@ final class TaskListViewModel: ObservableObject, AsyncExecutor, ErrorAlertProces
             .store(in: &subscriptions)
         
         runTask { [weak self] in
-            try await self?.taskListRepository.start()
+            try await self?.withDimming {
+                try await self?.taskListRepository.start()
+            }
         }
     }
     
@@ -69,7 +80,7 @@ final class TaskListViewModel: ObservableObject, AsyncExecutor, ErrorAlertProces
         }
     }
     
-    func deleteTasks(at indexes: IndexSet) {
+    func didTapDelete(at indexes: IndexSet) {
         let ids = indexes.map { tasks[$0].id }
         
         runTask { [weak self] in
@@ -77,10 +88,21 @@ final class TaskListViewModel: ObservableObject, AsyncExecutor, ErrorAlertProces
         }
     }
     
+    func didTapCreateTask() {
+        callBacks.createTask()
+    }
+    
+    // It would be better to work with idx (pos)
+    func didSelectRow(id: TodoTask.ID) {
+        if let task = taskListRepository.tasks.value.first(where: { $0.id == id }) {
+            callBacks.selectTask(task)
+        }
+    }
+    
     @MainActor
     private func logout() async throws {
         try await useCases.logout.execute()
-        onFinish()
+        callBacks.finish()
     }
 }
 
@@ -96,7 +118,7 @@ fileprivate final class DummyUseCase: LogoutUseCase, UpgradeTaskStatusUseCase, D
     func execute(ids: [TodoTask.ID]) async throws {}
 }
 
-final class DummyTaskListRepository: TaskManagerProtocol {
+final class DummyTaskManager: TaskManagerProtocol {
     var tasks = CurrentValueSubject<[TodoTask], Never>([])
     
     func start() async throws {
@@ -116,8 +138,8 @@ extension TaskListViewModel {
                 upgradeTaskStatus: DummyUseCase(),
                 delete: DummyUseCase()
             ),
-            taskListRepository: DummyTaskListRepository(),
-            onFinish: {}
+            taskListRepository: DummyTaskManager(),
+            callBacks: .init(selectTask: { _ in }, createTask: {}, finish: {})
         )
     }
 }
